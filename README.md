@@ -43,7 +43,7 @@ Foram fornecidas as seguintes informações de vendas para cada loja:
 
 # 3. Estratégia de solução
 
-O método utilizado para o projeto foi o CRISP-DS, aplicado conforme as etapas abaixo:
+O método utilizado para o projeto foi o CRISP-DM, aplicado conforme as etapas abaixo:
 
 **Passo 01. Descrição dos Dados:** O objetivo é utilizar métricas estatísticas para identificar outliers no escopo do negócio e também analisar métricas estatísticas básicas como: média, mediana, máximo, mínimo, intervalo, skewness, kurtosis e desvio padrão.
 
@@ -158,7 +158,7 @@ https://t.me/ederson_rossmann_bot)
 
 # 10. Conclusões
 
-Considerando o primeiro ciclo do CRISP, o modelo final apresentou um desempenho satisfatório, considerando uma margem de erro de 9,53% do valor predito para mais ou para menos.  
+Considerando o primeiro ciclo do projeto, o modelo final apresentou um desempenho satisfatório, considerando uma margem de erro de 9,53% do valor predito para mais ou para menos.  
 Verificou-se também que o modelo final tem uma tendência a subestimar as previsões em 1,3%.
 
 # 11. Lições aprendidas
@@ -168,7 +168,7 @@ Verificou-se também que o modelo final tem uma tendência a subestimar as previ
 
 # 12. Próximos passos
 
-Pode ser realizado um novo ciclo CRISP de modo a buscar melhorar a performance do modelo, através de nova engenharia de variáveis, nova técnica de seleção de variáveis para o modelo, testar outros algoritmos e assim por diante.
+Pode ser realizado um novo ciclo do método CRISP-DM de modo a buscar melhorar a performance do modelo, através de nova engenharia de variáveis, nova técnica de seleção de variáveis para o modelo, testar outros algoritmos e assim por diante.
 
 # Autor
 
