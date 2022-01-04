@@ -5,7 +5,8 @@ Previsões de Vendas para Rede de Farmácias Rossmann
 
 Este é um projeto de aprendizado de máquina de previsão de vendas.  
 Os dados usados estão disponíveis no [Kaggle](https://www.kaggle.com/c/rossmann-store-sales).  
-Acesse o notebook do projeto [aqui](https://github.com/moraes-ederson/proj_vendas_rossmann_regression/blob/2fb6e065cab2ea7da2888ce453136a805bfd1aff/notebooks/1.0_edm_store_sales_prediction.ipynb).  
+
+**Acesse o código do projeto** [aqui](https://github.com/moraes-ederson/proj_vendas_rossmann_regression/blob/2fb6e065cab2ea7da2888ce453136a805bfd1aff/notebooks/1.0_edm_store_sales_prediction.ipynb).  
 
 # 1. Problema de negócio
 
