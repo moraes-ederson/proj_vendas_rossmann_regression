@@ -4,7 +4,7 @@ Previsões de Vendas para Rede de Farmácias Rossmann
 ![](references/rossmann.jpg)
 
 Este é um projeto de aprendizado de máquina de previsão de vendas.  
-Os dados usados estão disponíveis no [Kaggle](https://www.kaggle.com/c/rossmann-store-sales).  
+Os dados utilizados estão disponíveis na plataforma do [Kaggle](https://www.kaggle.com/c/rossmann-store-sales).  
 
 **Acesse o código do projeto** [aqui](https://github.com/moraes-ederson/proj_vendas_rossmann_regression/blob/2fb6e065cab2ea7da2888ce453136a805bfd1aff/notebooks/1.0_edm_store_sales_prediction.ipynb).  
 
@@ -12,7 +12,7 @@ Os dados usados estão disponíveis no [Kaggle](https://www.kaggle.com/c/rossman
 
 Rossmann é uma das maiores redes de drogarias da Europa, com cerca de 56.200 funcionários e mais de 4.000 lojas.  
 A fim de definir um orçamento para a reforma das lojas o CFO da empresa solicitou aos seus gerentes a previsão de vendas de cada loja da rede para as próximas seis semanas.  
-As vendas da loja são influenciadas por muitos fatores, incluindo promoções, competição nas proximidades, feriados escolares e estaduais, sazonalidade e localidade.  
+As vendas das lojas são influenciadas por muitos fatores, incluindo promoções, competição nas proximidades, feriados escolares e estaduais, sazonalidade e localidade.  
 Nesse contexto, desenvolvi um modelo de aprendizado de máquina com o objetivo de fornecer as previsões com granularidade de vendas diárias por seis semanas/loja.  
 O resultado final é acessado via Bot do Telegram.  
 
@@ -102,25 +102,27 @@ A performance real dos modelos é dada pela média dos erros +/- o desvio padrã
 | Linear Regression	          | 2081.73 +/- 295.63	| 30.26 +/- 1.66	| 2952.52 +/- 468.37 |
 | Linear Regression - Lasso	  | 2116.38 +/- 341.5	  | 29.2 +/- 1.18	  | 3057.75 +/- 504.26 |
 
-Embora o modelo Random Forest Regressor tenha apresentado melhor desempenho, este modelo geralmente requer uma grande quantidade de espaço no servidor na etapa de implantação, gerando um aumento significativo de custo para a empresa. Portanto, optei pela utilização do modelo XGBoost Regressor, que após o ajuste fino dos hiperparâmetros apresentou desempenho semelhante e requer menos espaço no servidor, gerando menor custo para a empresa.
+Embora o modelo Random Forest Regressor tenha apresentado melhor desempenho, este modelo geralmente requer uma grande quantidade de espaço de armazenamento no servidor na etapa de implantação, gerando um aumento significativo de custo para a empresa, além de demandar bastante memória para o processamento. Portanto, optei pela utilização do modelo XGBoost Regressor, que após o ajuste fino dos hiperparâmetros tende a apresentar uma performance melhor e requer menos espaço de armazenamento no servidor, gerando assim menos custos.
 
 # 7. Performance após ajuste fino dos hiperparâmetros (Hyperparameter Fine Tuning)
 
 Entendendo as métricas:
 - MAE: o modelo apresenta em média um valor de erro de $652.
 - MAPE: esse erro médio representa 9.5%, ou seja, para cada valor predito do modelo ele pode subestimar ou superestimar o resultado em 9.5%.
-- RMSE: apresenta um erro médio de 938 unidades, sendo que essa métrica é mais sensível a outliers e com isso, se essa métrica estiver bastante discrepante da MAE, deverão serem feitos outros ajustes nos dados. No entanto, a RMSE foi utilizada como métrica de melhoria para o modelo.
+- RMSE: apresenta um erro médio de 938 unidades, sendo que ela é mais sensível a outliers e com isso, se essa métrica estiver bastante discrepante da MAE, outros ajustes nos dados devem ser feitos. No entanto, a RMSE foi utilizada como métrica de melhoria para o modelo e foi considerada satisfatória.
 
 |    Model Name        |     MAE      |    MAPE    |     RMSE       |
 |:--------------------:|:------------:|:----------:|:--------------:|
 |  XGBoost Regressor   |   652.623    |   9.53     |   938.783      |
+
+Vimos que após o ajuste fino dos hiperparâmetros a performance do modelo melhorou em relação a avaliação anterior.
 
 ![](reports/figures/final_model_performance.png)
 
 # 8. Tradução do erro em métricas de negócio
 
 Em termos de negócios, MAE significa o quanto a previsão está errada, definindo limites superior e inferior. MAPE significa o percentual em que os valores previstos são diferentes em relação aos valores alvo, sendo, portanto, uma métrica de fácil interpretação.  
-A tabela abaixo mostra as piores previsões da loja, explicando que algumas lojas são mais desafiadoras de se prever. O campo previous_scenario é calculado subtraindo o MAE do campo de previsões e o campo best_scenario é calculado adicionando o campo MAE.  
+A tabela abaixo mostra as piores previsões para respectiva loja atingindo até 56% de margem de erro (MAPE), explicando que algumas lojas são mais desafiadoras de se prever. O campo worst_scenario é calculado subtraindo o MAE do campo de previsões e o campo best_scenario é calculado adicionando o campo MAE.  
 
 |   store |   predictions |   worst_scenario |   best_scenario |      MAE |     MAPE |
 |--------:|--------------:|-----------------:|----------------:|---------:|---------:|
@@ -134,7 +136,7 @@ No entanto, as lojas  que apresentaram grandes erros no resultado das previsões
 
 ![](reports/figures/mape_outliers.png)
 
-Por fim, a tabela abaixo mostra a soma de todas as lojas, bem como os piores e melhores cenários:
+Por fim, a tabela abaixo mostra a soma das previsões de vendas de todas as lojas, bem como os piores e melhores cenários:
 
 | Scenario       | Values           |
 |:---------------|:-----------------|
@@ -159,12 +161,13 @@ https://t.me/ederson_rossmann_bot)
 
 # 10. Conclusões
 
-Considerando o primeiro ciclo do projeto, o modelo final apresentou um desempenho satisfatório, considerando uma margem de erro de 9,53% do valor predito para mais ou para menos.  
-Verificou-se também que o modelo final tem uma tendência a subestimar as previsões em 1,3%.
+Considerando o primeiro ciclo do projeto, o modelo final apresentou um desempenho satisfatório, considerando uma margem de erro (MAPE) de 9,53% do valor predito para mais ou para menos, conforme mostrado na seção 7.  
+Verificou-se também que o modelo final tem uma tendência a subestimar as previsões em 1,3%, ou seja, tende a fazer uma previsão menor do que o valor real.
 
 # 11. Lições aprendidas
 
 - Projeto completo de Regressão Linear do tipo "end-to-end" de Ciência de Dados.
+- A importância de fazer uma boa engenharia de variáveis de modo a possibilitar realizar a análise exploratória e assim ter um grande entendimento dos dados, observando quais variáveis tendem a serem mais relevantes para o aprendizado do modelo. Desta maneira é possível unir o entendimento obtido nesta etapa com a etapa de Feature Selection em que a seleção das variáveis são feitas pelo algoritmo e selecionar as melhores variáveis para treinamento do modelo.
 - Disponibilizar em nuvem o modelo de manchine learning para produção.
 
 # 12. Próximos passos
